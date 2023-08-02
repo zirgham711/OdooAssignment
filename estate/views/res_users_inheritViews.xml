@@ -1,0 +1,40 @@
+<odoo>
+    <record model="ir.model" id="model_estate_property">
+        <field name="name">Estate Property</field>
+        <field name="model">estate.property</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_users_inherit_form">
+        <field name="name">res.users.inherit.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//sheet/notebook" position="inside">
+                    <page name="salesperson_properties" string="Salesperson Properties">
+                        <field name="property_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>+
+                </xpath>
+            </data>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_res_users_form">
+        <field name="name">Salespersons</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_res_users_inherit_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to create a new salesperson.
+            </p>
+        </field>
+    </record>
+<menuitem id="menu_users_companies" name="Users" sequence="60" action="action_res_users_form">
+            <menuitem id="menu_users_form_view" name="User Form" sequence="70">
+            </menuitem>
+</menuitem>
+</odoo>
